@@ -1,0 +1,25 @@
+[
+  
+  {
+    "FirstName": "Temurbek",
+    "LastName": "Ubaydullayev",
+    "Age": 21,
+    "Phone": "+998993561319",
+    "Email": "ubaydullayev117@gmail.com",
+    "Password": "}��#��hM�\r\u001e�\u001d\u0019�",
+    "Id": 1,
+    "CreatedAt": "2022-06-13T22:48:42.5028899+05:00",
+    "UpdatedAt": "0001-01-01T00:00:00"
+  },
+  {
+    "FirstName": "Otabek",
+    "LastName": "Sandiyev",
+    "Age": 22,
+    "Phone": "+998973452132",
+    "Email": "otabek@gmail.com",
+    "Password": "}��#��hM�\r\u001e�\u001d\u0019�",
+    "Id": 2,
+    "CreatedAt": "2022-06-13T22:50:05.6199627+05:00",
+    "UpdatedAt": "2022-06-13T22:51:42.6792969+05:00"
+  }
+]
