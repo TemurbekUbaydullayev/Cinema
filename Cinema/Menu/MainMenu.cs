@@ -254,7 +254,7 @@ namespace Cinema.Menu
                     {
                         var admins = adminService.GetAll();
 
-                        ConsoleTable adminTable = new ConsoleTable("Id", "Admin", "Age", "Phone", "Email");
+                        //ConsoleTable adminTable = new ConsoleTable("Id", "Admin", "Age", "Phone", "Email");
                         foreach (var admin in admins)
                         {
                             if (admin.FirstName != "" && admin.LastName != null)
