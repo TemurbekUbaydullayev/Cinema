@@ -38,9 +38,12 @@ namespace Cinema.Data.Repositories
 
         public bool Delete(long id)
         {
-            var movies = GetAll().Select(p => p.Id != id);
+            var movie = GetAll().FirstOrDefault(x => x.Id == id);
 
-            File.WriteAllText(path, JsonConvert.SerializeObject(movies));
+            if (movie is null)
+                return false;
+
+            File.WriteAllText(path, JsonConvert.SerializeObject(GetAll().Where(p => p.Id != id)));
 
             return true;
         }

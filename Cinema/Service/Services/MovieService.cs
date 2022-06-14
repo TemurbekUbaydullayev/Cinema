@@ -34,14 +34,7 @@ namespace Cinema.Service.Services
         }
 
         public bool Delete(long id)
-        {
-            MovieDto movieCheck = GetAll().FirstOrDefault(p => p.Equals(id));
-
-            if (movieCheck != null)
-                return movieRepository.Delete(id);
-
-            return false;
-        }
+                => movieRepository.Delete(id);
 
         public MovieDto Get(long id)
         {

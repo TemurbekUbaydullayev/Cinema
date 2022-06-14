@@ -13,7 +13,7 @@ namespace Cinema.Menu
         {
             while (true)
             {
-                Console.Write("\nAdminstratsiya(1) | Kino(2) | Dasturdan chiqish(3)\n >>> ");
+                Console.Write("\nAdminstratsiya(1) | Xaridlar bo'limi(2) | Dasturdan chiqish(3)\n >>> ");
 
                 string input = Console.ReadLine();
 
@@ -55,10 +55,86 @@ namespace Cinema.Menu
                 }
                 else if (input == "2")
                 {
+                    Console.Clear();
 
+                    MovieDto movieDto = new MovieDto();
+                    MovieService movieService = new MovieService();
+
+                    Console.Write("\nJanrlar(1) | Barchasini ko'rish(2) | Umumiy qidiruv(3) | Ortga qaytish(4)\n >>> ");
+                    string inp = Console.ReadLine();
+
+                    if(inp == "1")
+                    {
+                        Console.Clear();
+
+                        MovieGenre();
+                    }
+
+                    else if(inp == "2")
+                    {
+                        Console.Clear();
+
+                        try
+                        {
+                            var movies = movieService.GetAll();
+                            foreach (var movie in movies)
+                                Console.WriteLine($"{movie.Id} - {movie.Name} - {movie.Genre} - {movie.Price} - {movie.StartTime}\n");
+
+                            Console.Write($"Agar biror kino chiptasini sotib olishni istasangiz uning oldidagi raqamini kiriting:\n>>>");
+
+                            ByTicket(long.Parse(Console.ReadLine()));
+                        }
+
+                        catch
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("\nXatolik yuz berdi, qayta urinib ko'ring\n");
+                            Console.ForegroundColor = ConsoleColor.White;
+                        }
+                    }
+
+                    else if(inp == "3")
+                    {
+                        Console.Clear();
+
+                        try
+                        {
+                            Console.WriteLine($"Qidiruvni boshlang: ");
+                            var movies = Console.ReadLine().SearchOfMovie();
+
+                            foreach (var movie in movies)
+                                Console.WriteLine($"{movie.Id} - {movie.Name} - {movie.Genre} - {movie.Price} - {movie.StartTime}\n");
+
+                            Console.Write($"Agar biror kino chiptasini sotib olishni istasangiz uning oldidagi raqamini kiriting:\n>>>");
+
+                            ByTicket(long.Parse(Console.ReadLine()));
+                        }
+                        catch
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("\nXatolik yuz berdi, qayta urinib ko'ring\n");
+                            Console.ForegroundColor = ConsoleColor.White;
+                        }
+                    }
+
+                    else if(inp == "4")
+                    {
+                        Console.Clear();
+
+                        Menu();
+                    }
+
+                    else
+                    {
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("\nNothing Found\n");
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
                 }
                 else if (input == "3")
                 {
+                    Console.Clear();
                     Environment.Exit(0);
                 }
                 else
@@ -286,7 +362,7 @@ namespace Cinema.Menu
         {
             while (true)
             {
-                IMovieService adminService = new MovieService();
+                IMovieService movieService = new MovieService();
                 MovieDto movieDto = new MovieDto();
 
                 while (true)
@@ -325,15 +401,15 @@ namespace Cinema.Menu
                             Console.Write("Kino boshlanish vaqti: ");
                             movieDto.StartTime = Console.ReadLine();
 
-                            var newMovie = adminService.Create(movieDto);
+                            var newMovie = movieService.Create(movieDto);
 
                             Console.Clear();
 
                             Console.ForegroundColor = ConsoleColor.Green;
-                            Console.Write($"Muvaffaqqiyatli bajarildi\n\n");
+                            Console.Write($"{newMovie.Name} nomli kino ma'lumotlari muvaffaqqiyatli qo'shildi\n\n");
                             Console.ForegroundColor = ConsoleColor.White;
 
-                            AdminMenu();
+                            MovieMenu();
                         }
                         catch
                         {
@@ -352,7 +428,7 @@ namespace Cinema.Menu
 
                         movieDto.Id = long.Parse(Console.ReadLine());
 
-                        bool result = adminService.Delete(movieDto.Id);
+                        bool result = movieService.Delete(movieDto.Id);
 
                         if (result == true)
                         {
@@ -362,7 +438,7 @@ namespace Cinema.Menu
                             Console.Write("Admin muvaffaqqiyatli o'chirildi\n\n");
                             Console.ForegroundColor = ConsoleColor.White;
 
-                            AdminMenu();
+                            MovieMenu();
                         }
                         else
                         {
@@ -372,7 +448,7 @@ namespace Cinema.Menu
                             Console.Write($"Kechirasiz bizda id raqami {movieDto.Id} bo'lgan kino mavjud emas, qaytadan urinib ko'ring \n\n");
                             Console.ForegroundColor = ConsoleColor.White;
 
-                            AdminMenu();
+                            MovieMenu();
                         }
                     }
                     else if (inputAdminSelect == "3")
@@ -412,14 +488,14 @@ namespace Cinema.Menu
 
                             Console.Clear();
 
-                            var newAdmin = adminService.Update(movieDto);
+                            var newMovie = movieService.Update(movieDto);
 
 
                             Console.ForegroundColor = ConsoleColor.Green;
-                            Console.Write($"Ushbu admin ma'lumotlari qayta yozildi.\n\n");
+                            Console.Write($"Ushbu {newMovie.Name} nomli kino ma'lumotlari qayta yozildi.\n\n");
                             Console.ForegroundColor = ConsoleColor.White;
 
-                            AdminMenu();
+                            MovieMenu();
 
                         }
                         catch
@@ -435,17 +511,17 @@ namespace Cinema.Menu
 
                         try
                         {
-                            var admins = adminService.GetAll();
-                            foreach (var admin in admins)
+                            var movies = movieService.GetAll();
+                            foreach (var movie in movies)
                             {
-                                Console.WriteLine($"{admin.Id} - {admin.FirstName} {admin.LastName} - {admin.Age} - {admin.Email}");
+                                Console.WriteLine($"{movie.Id} - {movie.Name} - {movie.Genre} - {movie.Price} - {movie.StartTime}");
                             }
 
                         }
                         catch
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("\nXatolik yuz berdi, qayta urinib ko'ring\n");
+                            Console.WriteLine("\nXatolik yuz berdi, qayta urinib ko'ring\n\n");
                             Console.ForegroundColor = ConsoleColor.White;
                         }
                     }
@@ -462,6 +538,45 @@ namespace Cinema.Menu
                         Console.ForegroundColor = ConsoleColor.White;
                     }
                 }
+            }
+        }
+
+        private void ByTicket(long id)
+        {
+
+        }
+        private void MovieGenre()
+        {
+            Console.Write($"\nKlassik(1) | Drama(2) | Tarixiy(3) | Komediya(4) | Ortga qaytish(5)\n>>>");
+
+            var input = Console.ReadLine();
+
+            if( input == "1")
+            {
+
+            }
+            else if(input == "2")
+            {
+
+            }
+            else if( input == "3")
+            {
+
+            }
+            else if(input == "4")
+            {
+
+            }
+            else if(input == "5")
+            {
+
+            }
+            else
+            {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\nNothing Found\n");
+                Console.ForegroundColor = ConsoleColor.White;
             }
         }
     }
