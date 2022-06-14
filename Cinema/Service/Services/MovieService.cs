@@ -25,7 +25,6 @@ namespace Cinema.Service.Services
             var cinema = new Movie
             {
                 Name = movie.Name,
-                Description = movie.Description,
                 Genre = movie.Genre,
                 Price = movie.Price,
                 StartTime = movie.StartTime
@@ -59,7 +58,6 @@ namespace Cinema.Service.Services
             {
                 Id = p.Id,
                 Name = p.Name,
-                Description = p.Description,
                 Genre = p.Genre,
                 Price = p.Price,
                 StartTime = p.StartTime,
@@ -78,7 +76,6 @@ namespace Cinema.Service.Services
             {
                 Id = movie.Id,
                 Name = movie.Name,
-                Description = movie.Description,
                 Genre = movie.Genre,
                 Price = movie.Price,
                 StartTime = movie.StartTime,
@@ -95,7 +92,6 @@ namespace Cinema.Service.Services
             {
                 Id = movie.Id,
                 Name = movie.Name,
-                Description = movie.Description,
                 Price = movie.Price,
                 Genre = movie.Genre,
                 StartTime = movie.StartTime,

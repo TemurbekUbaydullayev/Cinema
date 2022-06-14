@@ -1,4 +1,5 @@
-﻿using Cinema.Service.DTOs;
+﻿using Cinema.Domain.Enums;
+using Cinema.Service.DTOs;
 using Cinema.Service.Extensions;
 using Cinema.Service.Interfaces;
 using Cinema.Service.Services;
@@ -110,7 +111,7 @@ namespace Cinema.Menu
 
             while (true)
             {
-                Console.Write("Admin qo'shish(1) | Adminni o'chirish(2) | Adminni yangilash(3) | Adminlar ro'yxati(4) | Go back(5)\n >>> ");
+                Console.Write("Admin qo'shish(1) | Adminni o'chirish(2) | Adminni yangilash(3) | Adminlar ro'yxati(4) | Ortga qaytish(5)\n >>> ");
                 string inputAdminSelect = Console.ReadLine();
 
                 if (inputAdminSelect == "1")
@@ -253,18 +254,9 @@ namespace Cinema.Menu
                     try
                     {
                         var admins = adminService.GetAll();
-
-                        //ConsoleTable adminTable = new ConsoleTable("Id", "Admin", "Age", "Phone", "Email");
                         foreach (var admin in admins)
                         {
-                            if (admin.FirstName != "" && admin.LastName != null)
-                            {
-                                adminTable.AddRow(admin.FirstName + " " + admin.LastName,
-                                    admin.Age,
-                                    admin.Phone,
-                                    admin.Email
-                                    );
-                            }
+                            Console.WriteLine($"{admin.Id} - {admin.FirstName} {admin.LastName} - {admin.Age} - {admin.Email}");
                         }
 
                     }
@@ -277,7 +269,8 @@ namespace Cinema.Menu
                 }
                 else if (inputAdminSelect == "5")
                 {
-
+                    Console.Clear();
+                    MissionAdmin();
                 }
                 else
                 {
@@ -293,7 +286,182 @@ namespace Cinema.Menu
         {
             while (true)
             {
+                IMovieService adminService = new MovieService();
+                MovieDto movieDto = new MovieDto();
 
+                while (true)
+                {
+                    Console.Write("Kino qo'shish(1) | Kinoni o'chirish(2) | Kinoni yangilash(3) | Kinolar ro'yxati(4) | Ortga qaytish(5)\n >>> ");
+                    string inputAdminSelect = Console.ReadLine();
+
+                    if (inputAdminSelect == "1")
+                    {
+                        Console.Clear();
+
+                        try
+                        {
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.Write("    Kino ma'lumotlarini kiriting:\n");
+                            Console.ForegroundColor = ConsoleColor.White;
+
+                            Console.Write("Kino nomini kiriting: ");
+                            movieDto.Name = Console.ReadLine();
+                            movieDto.Name = movieDto.Name.GetCapitalize();
+
+                            Console.Write("Janrni tanlash(classic(1), drama(2), history(3), comedy(4)): ");
+                            int input = int.Parse(Console.ReadLine());
+                            if (input == 1)
+                                movieDto.Genre = Genre.Classic;
+                            else if (input == 2)
+                                movieDto.Genre = Genre.Drama;
+                            else if (input == 3)
+                                movieDto.Genre = Genre.History;
+                            else if (input == 4)
+                                movieDto.Genre = Genre.Comedy;
+
+                            Console.Write("Chipta narxini kiriting: ");
+                            movieDto.Price = decimal.Parse(Console.ReadLine());
+
+                            Console.Write("Kino boshlanish vaqti: ");
+                            movieDto.StartTime = Console.ReadLine();
+
+                            var newMovie = adminService.Create(movieDto);
+
+                            Console.Clear();
+
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.Write($"Muvaffaqqiyatli bajarildi\n\n");
+                            Console.ForegroundColor = ConsoleColor.White;
+
+                            AdminMenu();
+                        }
+                        catch
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("\nXatolik yuz berdi, qayta urinib ko'ring\n");
+                            Console.ForegroundColor = ConsoleColor.White;
+                        }
+                    }
+                    else if (inputAdminSelect == "2")
+                    {
+                        Console.Clear();
+
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.Write("    O'chirilishi kerak bo'lgan kinoning id raqamini kiriting:\n>>> ");
+                        Console.ForegroundColor = ConsoleColor.White;
+
+                        movieDto.Id = long.Parse(Console.ReadLine());
+
+                        bool result = adminService.Delete(movieDto.Id);
+
+                        if (result == true)
+                        {
+                            Console.Clear();
+
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.Write("Admin muvaffaqqiyatli o'chirildi\n\n");
+                            Console.ForegroundColor = ConsoleColor.White;
+
+                            AdminMenu();
+                        }
+                        else
+                        {
+                            Console.Clear();
+
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.Write($"Kechirasiz bizda id raqami {movieDto.Id} bo'lgan kino mavjud emas, qaytadan urinib ko'ring \n\n");
+                            Console.ForegroundColor = ConsoleColor.White;
+
+                            AdminMenu();
+                        }
+                    }
+                    else if (inputAdminSelect == "3")
+                    {
+                        Console.Clear();
+
+                        try
+                        {
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.Write("Kino ma'lumotlariga o'zgartirish uchun ma'lumotlarni qayta kiriting:\n\n");
+                            Console.ForegroundColor = ConsoleColor.White;
+
+                            Console.Write("Id: ");
+                            movieDto.Id = long.Parse(Console.ReadLine());
+
+                            Console.Write("Kino nomi: ");
+                            movieDto.Name = Console.ReadLine();
+                            movieDto.Name = movieDto.Name.GetCapitalize();
+
+                            Console.Write("Janrn(classic(1), drama(2), history(3), comedy(4)): ");
+                            int input = int.Parse(Console.ReadLine());
+                            if (input == 1)
+                                movieDto.Genre = Genre.Classic;
+                            else if (input == 2)
+                                movieDto.Genre = Genre.Drama;
+                            else if (input == 3)
+                                movieDto.Genre = Genre.History;
+                            else if (input == 4)
+                                movieDto.Genre = Genre.Comedy;
+
+                            Console.Write("Chipta narxini: ");
+                            movieDto.Price = decimal.Parse(Console.ReadLine());
+
+                            Console.Write("Kino boshlanish vaqti: ");
+                            movieDto.StartTime = Console.ReadLine();
+
+
+                            Console.Clear();
+
+                            var newAdmin = adminService.Update(movieDto);
+
+
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.Write($"Ushbu admin ma'lumotlari qayta yozildi.\n\n");
+                            Console.ForegroundColor = ConsoleColor.White;
+
+                            AdminMenu();
+
+                        }
+                        catch
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("\nXatolik yuz berdi, qayta urinib ko'ring\n");
+                            Console.ForegroundColor = ConsoleColor.White;
+                        }
+                    }
+                    else if (inputAdminSelect == "4")
+                    {
+                        Console.Clear();
+
+                        try
+                        {
+                            var admins = adminService.GetAll();
+                            foreach (var admin in admins)
+                            {
+                                Console.WriteLine($"{admin.Id} - {admin.FirstName} {admin.LastName} - {admin.Age} - {admin.Email}");
+                            }
+
+                        }
+                        catch
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("\nXatolik yuz berdi, qayta urinib ko'ring\n");
+                            Console.ForegroundColor = ConsoleColor.White;
+                        }
+                    }
+                    else if (inputAdminSelect == "5")
+                    {
+                        Console.Clear();
+                        MissionAdmin();
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("\nNothing Found\n");
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+                }
             }
         }
     }
