@@ -7,8 +7,6 @@ using Cinema.Service.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cinema.Service.Services
 {
@@ -41,14 +39,7 @@ namespace Cinema.Service.Services
         }
 
         public bool Delete(long id)
-        {
-            AdminViewModel adminCheck = GetAll().FirstOrDefault(p => p.Equals(id));
-
-            if (adminCheck != null)
-                return adminRepository.Delete(id);
-
-            return false;
-        }
+            => adminRepository.Delete(id);
 
         public AdminViewModel Get(long id)
         {
@@ -67,7 +58,7 @@ namespace Cinema.Service.Services
                 FirstName = p.FirstName,
                 LastName = p.LastName,
                 Age = p.Age,
-                Phone= p.Phone,
+                Phone = p.Phone,
                 Email = p.Email,
                 CreatedAt = p.CreatedAt,
                 UpdatedAt = p.UpdatedAt

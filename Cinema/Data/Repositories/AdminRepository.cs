@@ -6,8 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cinema.Data.Repositories
 {
@@ -40,7 +38,14 @@ namespace Cinema.Data.Repositories
 
         public bool Delete(long id)
         {
-            var admins = GetAll().Select(p => p.Id != id);
+            var admins = GetAll();
+
+            var admin = admins.FirstOrDefault(x => x.Id == id);
+
+            if (admin is null)
+                return false;
+
+            admins = admins.Where(p => p.Id != id);
 
             File.WriteAllText(path, JsonConvert.SerializeObject(admins));
 

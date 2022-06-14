@@ -7,9 +7,9 @@ namespace Cinema.Service.Extensions
     {
         public static string GetHashPassword(this string password)
         {
-            
+
             byte[] tmpSource = ASCIIEncoding.ASCII.GetBytes(password);
-            
+
             byte[] tmpHash = new MD5CryptoServiceProvider().ComputeHash(tmpSource);
 
             StringBuilder stringOutput = new StringBuilder(tmpHash.Length);
