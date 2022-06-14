@@ -14,5 +14,6 @@ namespace Cinema.Service.Interfaces
         bool Delete(long id);
         AdminViewModel Get(long id);
         IEnumerable<AdminViewModel> GetAll();
+        string ReadPassword();
     }
 }
