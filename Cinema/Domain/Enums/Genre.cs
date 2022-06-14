@@ -4,10 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cinema.Service.DTOs
+namespace Cinema.Domain.Enums
 {
-    public class AdminForCreationDto : AdminViewModel
+    public enum Genre
     {
-        public string Password { get; set; }
+        Classic = 1,
+        Drama,
+        History,
+        Comedy
     }
 }

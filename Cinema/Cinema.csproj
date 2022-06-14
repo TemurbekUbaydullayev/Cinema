@@ -6,11 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Domain\Enums\" />
-    <Folder Include="Menu\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="XAct.Core.PCL" Version="0.0.5014" />
   </ItemGroup>

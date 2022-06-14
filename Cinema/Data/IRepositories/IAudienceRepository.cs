@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cinema.Service.DTOs
+namespace Cinema.Data.IRepositories
 {
-    public class AdminForCreationDto : AdminViewModel
+    public interface IAudienceRepository
     {
-        public string Password { get; set; }
+
     }
 }

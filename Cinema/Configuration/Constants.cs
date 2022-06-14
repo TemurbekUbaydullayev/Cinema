@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Cinema.Configuration
 {
-    public class Constants
+    public abstract class Constants
     {
         public const string APP_SETTINGS_PATH = @"..\..\..\Configuration\appsettings.json";
     }

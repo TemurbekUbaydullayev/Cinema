@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 using XSystem.Security.Cryptography;
 
 namespace Cinema.Service.Extensions
@@ -11,11 +7,19 @@ namespace Cinema.Service.Extensions
     {
         public static string GetHashPassword(this string password)
         {
-            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+            
+            byte[] tmpSource = ASCIIEncoding.ASCII.GetBytes(password);
+            
+            byte[] tmpHash = new MD5CryptoServiceProvider().ComputeHash(tmpSource);
 
-            var res = md5.ComputeHash(Encoding.UTF8.GetBytes(password));
+            StringBuilder stringOutput = new StringBuilder(tmpHash.Length);
 
-            return Encoding.UTF8.GetString(res);
+            for (int i = 0; i < tmpHash.Length; i++)
+            {
+                stringOutput.Append(tmpHash[i].ToString("X2"));
+            }
+
+            return stringOutput.ToString();
         }
     }
 }

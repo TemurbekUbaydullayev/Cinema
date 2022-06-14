@@ -4,10 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cinema.Service.DTOs
+namespace Cinema.Menu
 {
-    public class AdminForCreationDto : AdminViewModel
+    public class MainMenu
     {
-        public string Password { get; set; }
+        public void Menu()
+        {
+
+        }
+
+        public 
     }
 }
