@@ -38,7 +38,7 @@ namespace Cinema.Service.Services
 
         public MovieDto Get(long id)
         {
-            MovieDto movieCheck = GetAll().FirstOrDefault(p => p.Equals(id));
+            MovieDto movieCheck = GetAll().FirstOrDefault(p => p.Id.Equals(id));
 
             if (movieCheck != null)
                 return ConvertToViewModel(movieRepository.Get(id));

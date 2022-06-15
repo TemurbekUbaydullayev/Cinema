@@ -205,7 +205,7 @@ namespace Cinema.Menu
                         adminForCreationDto.FirstName = Console.ReadLine();
                         adminForCreationDto.FirstName = adminForCreationDto.FirstName.GetCapitalize();
 
-                        Console.Write("Familiyani kiritng: ");
+                        Console.Write("Familiyani kiriting: ");
                         adminForCreationDto.LastName = Console.ReadLine();
                         adminForCreationDto.LastName = adminForCreationDto.LastName.GetCapitalize();
 
@@ -227,7 +227,7 @@ namespace Cinema.Menu
                         Console.Clear();
 
                         Console.ForegroundColor = ConsoleColor.Green;
-                        Console.Write($"{adminForCreationDto.FirstName} adminlar safiga muvaffaqqiyatli qo'shildi\n\n");
+                        Console.Write($"{newAdmin.FirstName} adminlar safiga muvaffaqqiyatli qo'shildi\n\n");
                         Console.ForegroundColor = ConsoleColor.White;
 
                         AdminMenu();
@@ -311,7 +311,7 @@ namespace Cinema.Menu
                         Console.Clear();
 
                         Console.ForegroundColor = ConsoleColor.Green;
-                        Console.Write($"Ushbu admin ma'lumotlari qayta yozildi.\n\n");
+                        Console.Write($"{newAdmin.FirstName}ning ma'lumotlari qayta yozildi.\n\n");
                         Console.ForegroundColor = ConsoleColor.White;
 
                         AdminMenu();
@@ -385,7 +385,7 @@ namespace Cinema.Menu
                             movieDto.Name = Console.ReadLine();
                             movieDto.Name = movieDto.Name.GetCapitalize();
 
-                            Console.Write("Janrni tanlash(classic(1), drama(2), history(3), comedy(4)): ");
+                            Console.Write("Janrni tanlang (classic(1), drama(2), history(3), comedy(4)): ");
                             int input = int.Parse(Console.ReadLine());
                             if (input == 1)
                                 movieDto.Genre = Genre.Classic;
@@ -399,7 +399,7 @@ namespace Cinema.Menu
                             Console.Write("Chipta narxini kiriting: ");
                             movieDto.Price = decimal.Parse(Console.ReadLine());
 
-                            Console.Write("Kino boshlanish vaqti: ");
+                            Console.Write("Kino boshlanish vaqtini kiriting: ");
                             movieDto.StartTime = Console.ReadLine();
 
                             var newMovie = movieService.Create(movieDto);
@@ -469,7 +469,7 @@ namespace Cinema.Menu
                             movieDto.Name = Console.ReadLine();
                             movieDto.Name = movieDto.Name.GetCapitalize();
 
-                            Console.Write("Janrn(classic(1), drama(2), history(3), comedy(4)): ");
+                            Console.Write("Janr (classic(1), drama(2), history(3), comedy(4)): ");
                             int input = int.Parse(Console.ReadLine());
                             if (input == 1)
                                 movieDto.Genre = Genre.Classic;
@@ -480,7 +480,7 @@ namespace Cinema.Menu
                             else if (input == 4)
                                 movieDto.Genre = Genre.Comedy;
 
-                            Console.Write("Chipta narxini: ");
+                            Console.Write("Chipta narxi: ");
                             movieDto.Price = decimal.Parse(Console.ReadLine());
 
                             Console.Write("Kino boshlanish vaqti: ");
@@ -515,7 +515,7 @@ namespace Cinema.Menu
                             var movies = movieService.GetAll();
                             foreach (var movie in movies)
                             {
-                                Console.WriteLine($"{movie.Id} - {movie.Name} - {movie.Genre} - {movie.Price} - {movie.StartTime}");
+                                Console.WriteLine($"{movie.Id} - {movie.Name} - {movie.Genre} - {movie.Price} - {movie.StartTime}\n");
                             }
 
                         }
@@ -555,18 +555,18 @@ namespace Cinema.Menu
             try
             {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.Write("Xaridni amalga oshirish uchun ba'zi malumotlaringizni kiritishingiz zarur:\n");
+                Console.Write("Xaridni amalga oshirish uchun ba'zi malumotlaringizni kiritishingiz zarur:\n\n");
                 Console.ForegroundColor = ConsoleColor.White;
 
-                Console.Write("Ismni kiriting: ");
+                Console.Write("Ismingizni kiriting: ");
                 audienceDto.FirstName = Console.ReadLine();
                 audienceDto.FirstName = audienceDto.FirstName.GetCapitalize();
 
-                Console.Write("Familiyani kiritng: ");
+                Console.Write("Familiyangizni kiritng: ");
                 audienceDto.LastName = Console.ReadLine();
                 audienceDto.LastName = audienceDto.LastName.GetCapitalize();
 
-                Console.Write("Emailni kiriting: ");
+                Console.Write("Emailingizni kiriting: ");
                 audienceDto.Email = Console.ReadLine();
 
                 audienceDto.MovieName = movieService.Get(id).Name;
@@ -574,13 +574,14 @@ namespace Cinema.Menu
                 var audience = audienceService.Create(audienceDto);
 
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.Write($"Xaridingiz muvaffaqqiyatli amalga oshirildi\n\n");
+                Console.Write($"\n{audience.FirstName} xaridingiz muvaffaqqiyatli amalga oshirildi\n\n");
                 Console.ForegroundColor = ConsoleColor.White;
-
             }
             catch
             {
-
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\nXatolik yuz berdi, qayta urinib ko'ring\n");
+                Console.ForegroundColor = ConsoleColor.White;
             }
         }
         private void MovieGenre()
@@ -589,7 +590,7 @@ namespace Cinema.Menu
 
             while(true)
             {
-                Console.Write($"\nKlassik(1) | Drama(2) | Tarixiy(3) | Komediya(4) | Ortga qaytish(5)\n>>>");
+                Console.Write($"\nKlassik(1) | Drama(2) | Tarixiy(3) | Komediya(4) | Asosiy Menu(5)\n>>>");
 
                 var input = Console.ReadLine();
 
@@ -648,7 +649,8 @@ namespace Cinema.Menu
                 }
                 else if (input == "5")
                 {
-                    
+                    Console.Clear();
+                    Menu();
                 }
                 else
                 {

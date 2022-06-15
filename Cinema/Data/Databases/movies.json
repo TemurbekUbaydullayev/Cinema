@@ -1,1 +1,30 @@
-[{"Name":"Jumong","Genre":3,"Price":12300.0,"StartTime":"Mon, 17 - 00","Id":1,"CreatedAt":"2022-06-14T02:23:59.2095062+05:00","UpdatedAt":"0001-01-01T00:00:00"},{"Name":"Munnaboy","Genre":4,"Price":13460.0,"StartTime":"Wen, 12 - 30","Id":3,"CreatedAt":"2022-06-15T03:10:16.8019907+05:00","UpdatedAt":"0001-01-01T00:00:00"}]
+[
+  
+  {
+    "Name": "Jumong",
+    "Genre": 3,
+    "Price": 12300.0,
+    "StartTime": "Mon, 17 - 00",
+    "Id": 1,
+    "CreatedAt": "2022-06-14T02:23:59.2095062+05:00",
+    "UpdatedAt": "0001-01-01T00:00:00"
+  },
+  {
+    "Name": "Munnaboy",
+    "Genre": 4,
+    "Price": 13460.0,
+    "StartTime": "Wen, 12 - 30",
+    "Id": 3,
+    "CreatedAt": "2022-06-15T03:10:16.8019907+05:00",
+    "UpdatedAt": "0001-01-01T00:00:00"
+  },
+  {
+    "Name": "Qisqa hikoya",
+    "Genre": 1,
+    "Price": 23000.0,
+    "StartTime": "Fri, 14 - 00",
+    "Id": 4,
+    "CreatedAt": "0001-01-01T00:00:00",
+    "UpdatedAt": "2022-06-15T06:20:38.4810359+05:00"
+  }
+]

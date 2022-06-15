@@ -1,1 +1,26 @@
-﻿
+[
+  {
+    "Id": 1,
+    "FirstName": "Salim",
+    "LastName": "Aliyev",
+    "Email": "salim@gmail.com",
+    "MovieName": "Jumong",
+    "TimeOfGetTicket": "2022-06-15T07:03:07.9241862+05:00"
+  },
+  {
+    "Id": 2,
+    "FirstName": "Ahmad",
+    "LastName": "Asqarov",
+    "Email": "ahmad@gmail.com",
+    "MovieName": "Qisqa hikoya",
+    "TimeOfGetTicket": "2022-06-15T07:04:18.0091517+05:00"
+  },
+  {
+    "Id": 3,
+    "FirstName": "Karim",
+    "LastName": "Ahadov",
+    "Email": "karim@gmail.com",
+    "MovieName": "Qisqa hikoya",
+    "TimeOfGetTicket": "2022-06-15T07:05:10.3248414+05:00"
+  }
+]

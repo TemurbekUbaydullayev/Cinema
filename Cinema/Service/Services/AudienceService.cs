@@ -27,8 +27,7 @@ namespace Cinema.Service.Services
                 FirstName = entity.FirstName,
                 LastName = entity.LastName,
                 Email = entity.Email,
-                MovieName = entity.MovieName,
-                TimeOfGetTicket = entity.TimeOfGetTicket
+                MovieName = entity.MovieName
             };
 
             return ConvertToViewModel(audienceRepository.Create(audience));
