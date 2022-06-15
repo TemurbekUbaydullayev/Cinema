@@ -27,6 +27,7 @@ namespace Cinema.Service.Services
                 FirstName = entity.FirstName,
                 LastName = entity.LastName,
                 Email = entity.Email,
+                MovieName = entity.MovieName,
                 TimeOfGetTicket = entity.TimeOfGetTicket
             };
 
@@ -40,6 +41,7 @@ namespace Cinema.Service.Services
                 FirstName = p.FirstName,
                 LastName = p.LastName,
                 Email = p.Email,
+                MovieName = p.MovieName,
                 TimeOfGetTicket = p.TimeOfGetTicket
             });
 
@@ -51,6 +53,7 @@ namespace Cinema.Service.Services
                 FirstName = audience.FirstName,
                 LastName = audience.LastName,
                 Email = audience.Email,
+                MovieName = audience.MovieName,
                 TimeOfGetTicket = audience.TimeOfGetTicket
             };
         }

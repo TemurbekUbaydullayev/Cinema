@@ -4,6 +4,7 @@ using Cinema.Service.Extensions;
 using Cinema.Service.Interfaces;
 using Cinema.Service.Services;
 using System;
+using System.Linq;
 
 namespace Cinema.Menu
 {
@@ -435,7 +436,7 @@ namespace Cinema.Menu
                             Console.Clear();
 
                             Console.ForegroundColor = ConsoleColor.Green;
-                            Console.Write("Admin muvaffaqqiyatli o'chirildi\n\n");
+                            Console.Write("Kino muvaffaqqiyatli o'chirildi\n\n");
                             Console.ForegroundColor = ConsoleColor.White;
 
                             MovieMenu();
@@ -543,40 +544,119 @@ namespace Cinema.Menu
 
         private void ByTicket(long id)
         {
+            Console.Clear();
 
+            IMovieService movieService = new MovieService();
+
+            AudienceDto audienceDto = new AudienceDto();
+
+            IAudienceService audienceService = new AudienceService();
+
+            try
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write("Xaridni amalga oshirish uchun ba'zi malumotlaringizni kiritishingiz zarur:\n");
+                Console.ForegroundColor = ConsoleColor.White;
+
+                Console.Write("Ismni kiriting: ");
+                audienceDto.FirstName = Console.ReadLine();
+                audienceDto.FirstName = audienceDto.FirstName.GetCapitalize();
+
+                Console.Write("Familiyani kiritng: ");
+                audienceDto.LastName = Console.ReadLine();
+                audienceDto.LastName = audienceDto.LastName.GetCapitalize();
+
+                Console.Write("Emailni kiriting: ");
+                audienceDto.Email = Console.ReadLine();
+
+                audienceDto.MovieName = movieService.Get(id).Name;
+
+                var audience = audienceService.Create(audienceDto);
+
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write($"Xaridingiz muvaffaqqiyatli amalga oshirildi\n\n");
+                Console.ForegroundColor = ConsoleColor.White;
+
+            }
+            catch
+            {
+
+            }
         }
         private void MovieGenre()
         {
-            Console.Write($"\nKlassik(1) | Drama(2) | Tarixiy(3) | Komediya(4) | Ortga qaytish(5)\n>>>");
+            IMovieService movieService = new MovieService();
 
-            var input = Console.ReadLine();
-
-            if( input == "1")
+            while(true)
             {
+                Console.Write($"\nKlassik(1) | Drama(2) | Tarixiy(3) | Komediya(4) | Ortga qaytish(5)\n>>>");
 
-            }
-            else if(input == "2")
-            {
+                var input = Console.ReadLine();
 
-            }
-            else if( input == "3")
-            {
+                if (input == "1")
+                {
+                    Console.Clear();
 
-            }
-            else if(input == "4")
-            {
+                    var classicMovies = movieService.GetAll().Where(p => p.Genre == Genre.Classic);
 
-            }
-            else if(input == "5")
-            {
+                    foreach (var movie in classicMovies)
+                        Console.WriteLine($"{movie.Id} - {movie.Name} - {movie.Genre} - {movie.Price} - {movie.StartTime}");
 
-            }
-            else
-            {
-                Console.Clear();
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("\nNothing Found\n");
-                Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write($"Agar biror kino chiptasini sotib olishni istasangiz uning oldidagi raqamini kiriting:\n>>>");
+
+                    ByTicket(long.Parse(Console.ReadLine()));
+
+                }
+                else if (input == "2")
+                {
+                    Console.Clear();
+
+                    var classicMovies = movieService.GetAll().Where(p => p.Genre == Genre.Drama);
+
+                    foreach (var movie in classicMovies)
+                        Console.WriteLine($"{movie.Id} - {movie.Name} - {movie.Genre} - {movie.Price} - {movie.StartTime}");
+
+                    Console.Write($"Agar biror kino chiptasini sotib olishni istasangiz uning oldidagi raqamini kiriting:\n>>>");
+
+                    ByTicket(long.Parse(Console.ReadLine()));
+                }
+                else if (input == "3")
+                {
+                    Console.Clear();
+
+                    var classicMovies = movieService.GetAll().Where(p => p.Genre == Genre.History);
+
+                    foreach (var movie in classicMovies)
+                        Console.WriteLine($"{movie.Id} - {movie.Name} - {movie.Genre} - {movie.Price} - {movie.StartTime}");
+
+                    Console.Write($"Agar biror kino chiptasini sotib olishni istasangiz uning oldidagi raqamini kiriting:\n>>>");
+
+                    ByTicket(long.Parse(Console.ReadLine()));
+                }
+                else if (input == "4")
+                {
+                    Console.Clear();
+
+                    var classicMovies = movieService.GetAll().Where(p => p.Genre == Genre.Comedy);
+
+                    foreach (var movie in classicMovies)
+                        Console.WriteLine($"{movie.Id} - {movie.Name} - {movie.Genre} - {movie.Price} - {movie.StartTime}");
+
+                    Console.Write($"Agar biror kino chiptasini sotib olishni istasangiz uning oldidagi raqamini kiriting:\n>>>");
+
+                    ByTicket(long.Parse(Console.ReadLine()));
+                }
+                else if (input == "5")
+                {
+                    
+                }
+                else
+                {
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("\nNothing Found\n");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
             }
         }
     }
