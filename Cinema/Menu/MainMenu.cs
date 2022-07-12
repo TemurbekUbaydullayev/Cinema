@@ -64,14 +64,14 @@ namespace Cinema.Menu
                     Console.Write("\nJanrlar(1) | Barchasini ko'rish(2) | Umumiy qidiruv(3) | Ortga qaytish(4)\n >>> ");
                     string inp = Console.ReadLine();
 
-                    if(inp == "1")
+                    if (inp == "1")
                     {
                         Console.Clear();
 
                         MovieGenre();
                     }
 
-                    else if(inp == "2")
+                    else if (inp == "2")
                     {
                         Console.Clear();
 
@@ -94,7 +94,7 @@ namespace Cinema.Menu
                         }
                     }
 
-                    else if(inp == "3")
+                    else if (inp == "3")
                     {
                         Console.Clear();
 
@@ -118,7 +118,7 @@ namespace Cinema.Menu
                         }
                     }
 
-                    else if(inp == "4")
+                    else if (inp == "4")
                     {
                         Console.Clear();
 
@@ -588,7 +588,7 @@ namespace Cinema.Menu
         {
             IMovieService movieService = new MovieService();
 
-            while(true)
+            while (true)
             {
                 Console.Write($"\nKlassik(1) | Drama(2) | Tarixiy(3) | Komediya(4) | Asosiy Menu(5)\n>>>");
 
